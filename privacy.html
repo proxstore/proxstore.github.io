@@ -1,115 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0 16px;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — ProxGlobal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F8FC;
+    --surface:#FFFFFF;
+    --ink:#101A2E;
+    --ink-soft:#5B6B85;
+    --ink-faint:#9AA7BC;
+    --red:#0A5CE0;
+    --red-deep:#063E9C;
+    --red-dark:#031D4D;
+    --orange:#12B4E0;
+    --gold:#5CDBFF;
+    --line:#E1E8F5;
+    --line-soft:#EDF2FA;
+    --radius:16px;
+    --shadow: 0 1px 2px rgba(6,20,60,.04), 0 14px 34px rgba(6,20,60,.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Be Vietnam Pro',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Be Vietnam Pro',sans-serif; font-weight:800;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--red);color:#fff;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,251,246,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    transition:box-shadow .25s ease;
+  }
+  .topbar.scrolled{box-shadow:0 4px 24px rgba(6,20,60,.06);}
+  .progress-track{
+    position:absolute; left:0; bottom:-1px; width:100%; height:2px;
+    background:transparent; overflow:hidden;
+  }
+  .progress-bar{
+    height:100%; width:0%;
+    background:linear-gradient(90deg,var(--red),var(--orange),var(--gold));
+    transition:width .1s linear;
+  }
+  .topbar-inner{
+    max-width:1040px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-mark{
+    width:32px; height:32px; border-radius:9px;
+    background:linear-gradient(135deg,var(--red),var(--orange));
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:#fff; font-size:16px;
+  }
+  .brand-name{color:var(--ink); font-weight:700; font-size:15.5px; letter-spacing:.1px;}
+  .topbar-tag{color:var(--ink-faint); font-size:12.5px; font-family:'JetBrains Mono',monospace;}
+  .topbar-tag span{color:var(--red); font-weight:600;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(135deg,var(--red-dark) 0%, var(--red-deep) 45%, var(--red) 100%);
+    overflow:hidden;
+    padding:72px 28px 128px;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+  .hero-canvas{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:.55; pointer-events:none;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:-140px; right:-120px; width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(92,219,255,.5), rgba(18,180,224,0) 70%);
+    animation:floatBlob 11s ease-in-out infinite;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; bottom:-180px; left:-100px; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle at 60% 40%, rgba(18,180,224,.4), rgba(18,180,224,0) 70%);
+    animation:floatBlob 14s ease-in-out infinite reverse;
+  }
+  @keyframes floatBlob{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-26px,24px) scale(1.05);}
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(22px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .hero-grid{
+    max-width:1040px; margin:0 auto; position:relative;
+    display:flex; flex-direction:column; align-items:center; gap:24px;
+    perspective:900px;
+  }
+  .hero-inner > *{opacity:0; animation:fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;}
+  .hero-inner > .eyebrow{animation-delay:.05s;}
+  .hero-inner > h1{animation-delay:.15s;}
+  .hero-inner > p{animation-delay:.3s;}
+  .hero-inner > .hero-visual{animation-delay:.36s;}
+  .hero-inner > .hero-meta{animation-delay:.55s;}
+  .hero-inner{position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.06em;
+    color:#FFE7B8; text-transform:uppercase;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28);
+    padding:7px 14px; border-radius:100px; margin-bottom:24px;
+  }
+  .eyebrow-dot{width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,176,32,.25);}
+  .hero h1{
+    color:#fff; font-size:clamp(34px,4.6vw,52px); line-height:1.12; font-weight:800;
+    margin:0 auto 18px; max-width:900px; letter-spacing:-.01em;
+  }
+  .hero p{
+    color:rgba(255,255,255,.82); font-size:17px; line-height:1.65; max-width:640px; margin:0 auto 32px; font-weight:400;
+  }
+  .hero-meta{display:flex; flex-wrap:wrap; gap:12px; justify-content:center;}
+  .meta-chip{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22);
+    padding:10px 16px; border-radius:100px; font-size:13.5px; color:rgba(255,255,255,.88); font-weight:500;
+  }
+  .meta-chip b{color:#fff; font-weight:700;}
+  .meta-chip-link{
+    text-decoration:none; cursor:pointer;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .meta-chip-link:hover{
+    background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.4);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- Hero shield illustration ---------- */
+  .hero-visual{
+    position:relative; width:280px; height:280px;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; animation:visualFadeIn .6s ease .2s forwards;
+    transition:transform .25s ease-out;
+    transform-style:preserve-3d;
+  }
+  @keyframes visualFadeIn{ to{ opacity:1; } }
+  .ring{
+    position:absolute; border-radius:50%;
+    border:1px solid rgba(255,255,255,.16);
+  }
+  .ring.r1{width:100%; height:100%; animation:pulseRing 3.6s ease-out infinite;}
+  .ring.r2{width:100%; height:100%; animation:pulseRing 3.6s ease-out infinite 1.2s;}
+  .ring.r3{width:100%; height:100%; animation:pulseRing 3.6s ease-out infinite 2.4s;}
+  @keyframes pulseRing{
+    0%{transform:scale(.55); opacity:0;}
+    15%{opacity:.55;}
+    100%{transform:scale(1.15); opacity:0;}
+  }
+  .shield-svg{width:168px; height:168px; position:relative; z-index:2; filter:drop-shadow(0 18px 30px rgba(3,29,77,.45));}
+  .shield-path{
+    stroke-dasharray:340; stroke-dashoffset:340;
+    animation:drawShield 1s cubic-bezier(.22,1,.36,1) .3s forwards;
+  }
+  .shield-fill{ opacity:0; animation:fadeIn .5s ease .8s forwards; }
+  .lock-path{
+    opacity:0; animation:fadeIn .4s ease 1.1s forwards;
+  }
+  @keyframes drawShield{ to{ stroke-dashoffset:0; } }
+  @keyframes fadeIn{ to{ opacity:1; } }
+  .orbit{
+    position:absolute; inset:0; animation:spin 16s linear infinite;
+  }
+  .orbit.rev{ animation:spin 22s linear infinite reverse; }
+  .orbit .node{
+    position:absolute; width:9px; height:9px; border-radius:50%;
+    background:var(--gold); box-shadow:0 0 12px 2px rgba(92,219,255,.7);
+  }
+  .orbit.o1 .node{ top:-4px; left:50%; margin-left:-4.5px; }
+  .orbit.o2 .node{ bottom:6px; right:2px; background:#fff; box-shadow:0 0 10px 2px rgba(255,255,255,.6); }
+  .orbit.o3 .node{ bottom:22px; left:-2px; background:var(--gold); }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .hero-visual{width:220px; height:220px; margin:8px 0 36px;}
+
+  @media (max-width:1000px){
+    .hero-visual{display:none;}
+  }
+
+  /* At-a-glance cards, overlapping hero bottom */
+  .glance{
+    max-width:1040px; margin:-84px auto 0; padding:0 28px; position:relative; z-index:2;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  .glance-card{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); padding:24px 22px; box-shadow:var(--shadow);
+    transition:transform .25s ease, box-shadow .25s ease;
+    opacity:0; transform:translateY(26px);
+  }
+  .glance-card.visible{
+    animation:fadeUp .65s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .glance-card:nth-child(1).visible{animation-delay:.05s;}
+  .glance-card:nth-child(2).visible{animation-delay:.15s;}
+  .glance-card:nth-child(3).visible{animation-delay:.25s;}
+  .glance-card:nth-child(4).visible{animation-delay:.35s;}
+  .glance-card:hover{transform:translateY(-5px); box-shadow:0 10px 28px rgba(6,20,60,.1);}
+  .glance-icon{
+    width:42px; height:42px; border-radius:12px; margin-bottom:16px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(10,92,224,.1), rgba(18,180,224,.14));
+  }
+  .glance-icon svg{width:20px; height:20px;}
+  .glance-icon svg path{
+    stroke-dasharray:24; stroke-dashoffset:24;
+    transition:stroke-dashoffset .55s ease .25s;
+  }
+  .glance-card.visible .glance-icon svg path{stroke-dashoffset:0;}
+  .glance-card h3{font-size:15.5px; margin:0 0 6px; font-weight:700;}
+  .glance-card p{font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.55;}
+
+  /* ---------- Layout ---------- */
+  .layout{
+    max-width:1040px; margin:0 auto; padding:72px 28px 100px;
+    display:grid; grid-template-columns:252px 1fr; gap:56px; align-items:start;
+  }
+  .toc{
+    position:sticky; top:88px;
+    display:flex; flex-direction:column; gap:3px;
+  }
+  .toc-label{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em;
+    color:var(--ink-faint); text-transform:uppercase; margin:0 0 12px 14px;
+  }
+  .toc-track{position:relative;}
+  .toc-indicator{
+    position:absolute; left:0; top:0; width:100%; height:0; border-radius:100px;
+    background:linear-gradient(135deg,var(--red),var(--orange));
+    box-shadow:0 6px 16px rgba(10,92,224,.28);
+    transition:transform .38s cubic-bezier(.34,1.1,.4,1), height .38s cubic-bezier(.34,1.1,.4,1), opacity .2s;
+    opacity:0; z-index:0;
+  }
+  .toc-indicator.ready{opacity:1;}
+  .toc a{
+    position:relative; z-index:1;
+    text-decoration:none; color:var(--ink-soft); font-size:14px; font-weight:500;
+    padding:10px 14px; border-radius:100px;
+    display:flex; gap:10px; align-items:center; transition:color .25s ease;
+  }
+  .toc a .n{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-faint);
+    width:20px; height:20px; border-radius:50%; background:var(--line-soft);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:color .25s ease, background .25s ease;
+  }
+  .toc a:hover{color:var(--ink);}
+  .toc a.active{color:#fff; font-weight:600;}
+  .toc a.active .n{color:var(--red); background:#fff;}
+
+  .content{display:flex; flex-direction:column; gap:16px;}
+  section.card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px 38px; scroll-margin-top:88px;
+    opacity:0; transform:translateY(28px);
+    transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1), box-shadow .25s ease;
+  }
+  section.card.visible{opacity:1; transform:translateY(0);}
+  section.card:hover{box-shadow:0 10px 30px rgba(6,20,60,.06);}
+  section.card .kicker{
+    display:flex; align-items:center; gap:14px; margin-bottom:16px;
+  }
+  section.card .num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; color:#fff;
+    background:linear-gradient(135deg,var(--red),var(--orange));
+    border-radius:50%; width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:transform .35s cubic-bezier(.34,1.4,.64,1);
+  }
+  section.card.visible .num{animation:popNum .5s cubic-bezier(.34,1.5,.64,1) .1s both;}
+  @keyframes popNum{
+    0%{transform:scale(.4); opacity:0;}
+    70%{transform:scale(1.12);}
+    100%{transform:scale(1); opacity:1;}
+  }
+  section.card h2{font-size:21px; margin:0; font-weight:700;}
+  section.card p{color:var(--ink-soft); line-height:1.75; font-size:15px; margin:0 0 12px;}
+  section.card p:last-child{margin-bottom:0;}
+  section.card ul{margin:10px 0 0; padding-left:20px; color:var(--ink-soft); font-size:15px; line-height:1.7;}
+  section.card li{margin-bottom:4px;}
+
+  .subblock{
+    border:1px solid var(--line-soft); background:var(--bg);
+    border-radius:12px; padding:20px 22px; margin-top:18px;
+  }
+  .subblock h4{
+    margin:0 0 10px; font-size:12.5px; font-family:'JetBrains Mono',monospace;
+    text-transform:uppercase; letter-spacing:.05em; color:var(--red-deep); font-weight:600;
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:2px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace; font-size:12px; padding:5px 11px;
+    border-radius:100px; background:#fff; border:1px solid var(--line); color:var(--ink-soft);
+  }
+
+  table.data-table{width:100%; border-collapse:collapse; margin-top:8px; font-size:14px;}
+  table.data-table th{
+    text-align:left; font-family:'JetBrains Mono',monospace; font-size:11.5px;
+    text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint);
+    padding:0 0 10px; border-bottom:1px solid var(--line); font-weight:500;
+  }
+  table.data-table td{
+    padding:15px 14px 15px 0; border-bottom:1px solid var(--line-soft); vertical-align:top; color:var(--ink-soft);
+  }
+  table.data-table tr:last-child td{border-bottom:none;}
+  table.data-table td.dcat{color:var(--ink); font-weight:700; font-size:14.5px; white-space:nowrap;}
+  .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:8px;}
+  .dot.linked{background:var(--red);}
+  .dot.notlinked{background:var(--orange);}
+
+  .contact-box{
+    display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    background:linear-gradient(135deg,var(--red-dark),var(--red-deep) 55%, var(--red));
+    border-radius:var(--radius); padding:38px 40px; margin-top:8px;
+    color:#fff; position:relative; overflow:hidden;
+  }
+  .contact-box::after{
+    content:""; position:absolute; top:-80px; right:-60px; width:260px; height:260px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,176,32,.4), transparent 70%);
+  }
+  .contact-box h2{color:#fff; margin:0 0 8px; font-size:22px; position:relative;}
+  .contact-box p{color:rgba(255,255,255,.75); margin:0; font-size:14.5px; max-width:420px; position:relative;}
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:9px;
+    background:#fff; color:var(--red-deep); text-decoration:none;
+    font-weight:700; font-size:14.5px; padding:13px 22px; border-radius:100px;
+    white-space:nowrap; transition:transform .2s ease, box-shadow .2s ease; position:relative;
+  }
+  .contact-btn:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.18);}
+  .contact-btn svg{transition:transform .25s ease;}
+  .contact-btn:hover svg{transform:translateX(4px);}
+
+  .fab-top{
+    position:fixed; right:26px; bottom:26px; z-index:60;
+    width:46px; height:46px; border-radius:50%;
+    background:linear-gradient(135deg,var(--red),var(--orange));
+    color:#fff; text-decoration:none;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px rgba(10,92,224,.35);
+    opacity:0; transform:translateY(14px) scale(.85); pointer-events:none;
+    transition:opacity .3s ease, transform .3s cubic-bezier(.34,1.3,.64,1);
+  }
+  .fab-top.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+  .fab-top:hover{transform:translateY(-3px) scale(1.05);}
+  .fab-top svg{width:18px; height:18px;}
+
+  footer{
+    border-top:1px solid var(--line); padding:32px 28px; margin-top:8px;
+  }
+  .footer-inner{
+    max-width:1040px; margin:0 auto; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .footer-inner p{margin:0; font-size:13px; color:var(--ink-faint);}
+  .back-top{
+    font-size:13px; color:var(--red-deep); text-decoration:none; display:flex; gap:6px; align-items:center; font-weight:600;
+  }
+
+  @media (max-width: 900px){
+    .glance{grid-template-columns:1fr 1fr;}
+    .layout{grid-template-columns:1fr; padding-top:48px;}
+    .toc{position:static;}
+    .toc-track{
+      display:flex; flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:6px;
+      margin-bottom:10px; -webkit-overflow-scrolling:touch;
     }
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2, h3 {
-      color: #222;
-    }
-    h1 {
-      text-align: center;
-    }
-    .text-muted {
-      color: #888;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .highlight {
-      font-weight: bold;
-      color: #d9534f;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 14px;
-      color: #999;
-    }
-    a {
-      color: #3366ff;
-      text-decoration: none;
-    }
-  </style>
+    .toc-label{display:none;}
+    .toc-indicator{display:none;}
+    .toc a{flex:none; white-space:nowrap;}
+    .toc a.active{background:var(--red);}
+    section.card{padding:28px 24px;}
+    .contact-box{padding:30px 26px;}
+    .hero{clip-path:polygon(0 0, 100% 0, 100% 94%, 0 100%);}
+  }
+  @media (max-width: 560px){
+    .glance{grid-template-columns:1fr;}
+    .hero{padding:52px 20px 104px;}
+    .hero h1{font-size:32px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important; animation:none !important;}
+    .hero-inner > *{opacity:1;}
+    .glance-card, section.card{opacity:1; transform:none;}
+    .hero-visual{opacity:1;}
+    .shield-path{stroke-dashoffset:0;}
+    .shield-fill, .lock-path{opacity:1;}
+    .ring{opacity:0;}
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Privacy Policy</h1>
-    <p class="text-muted">Last Updated: May 21, 2025</p>
 
-    <h2>1. Personal Information</h2>
-    <p>We do <span class="highlight">not collect any personal information</span> from you such as name, email address, physical address, contacts, photos, etc.</p>
-
-    <h2>2. Facial Data</h2>
-    <p>We <span class="highlight">do not collect or store facial data</span> in our apps.</p>
-
-    <h2>3. Security</h2>
-    <p>We are committed to protecting your privacy. Although we do not collect personal information, we take appropriate administrative, physical, and electronic measures to protect non-personal information from unauthorized access and use.</p>
-
-    <h2>4. Your Privacy</h2>
-    <p>We <span class="highlight">do not retain or store any personal information</span> that could be used to identify you. Your data will not be shared or sold to any third parties.</p>
-
-    <h2>5. Crashlytics</h2>
-    <p>We use Crashlytics to collect crash reports and anonymous statistical data to improve the app. If the app crashes, the data may be uploaded to help us diagnose the problem.</p>
-
-    <h2>6. Data Used to Track You</h2>
-    <p>The following data may be used to track you across apps and websites owned by other companies:</p>
-    <ul>
-      <li><strong>Identifiers:</strong> Device ID (e.g., IDFA)</li>
-      <li><strong>Usage Data:</strong> Information about your interaction with the app, such as features used or content viewed</li>
-    </ul>
-
-    <p><strong>Data Linked to You</strong><br>
-    The following data, which may be collected and linked to your identity, is used for the purposes described:</p>
-    <ul>
-      <li><strong>Location:</strong> Approximate location
-        <ul>
-          <li><strong>Purposes:</strong> App functionality, personalized content</li>
-        </ul>
-      </li>
-      <li><strong>Usage Data:</strong> App interactions
-        <ul>
-          <li><strong>Purposes:</strong> Analytics, improving app performance, personalized ads</li>
-        </ul>
-      </li>
-    </ul>
-
-    <p><strong>Data Not Linked to You</strong><br>
-    The following data may be collected but is not linked to your identity:</p>
-    <ul>
-      <li><strong>Diagnostics:</strong> Crash logs, performance data
-        <ul>
-          <li><strong>Purposes:</strong> Improving app stability and performance</li>
-        </ul>
-      </li>
-    </ul>
-
-    <p><strong>Tracking Permission</strong><br>
-    This app requests permission to track you for personalized advertising or analytics across apps and websites owned by other companies. You can manage your tracking preferences in the app or through your device’s settings.</p>
-
-    <h2>7. Contact</h2>
-    <p>If you have any questions or comments about this Privacy Policy or any other issue related to our app or services, please contact us via email: <a href="mailto:Support@proxglobal.com">Support@proxglobal.com</a></p>
-
-    <div class="footer">&copy; 2025 Proxglobal Inc. All rights reserved.</div>
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <div class="brand-mark">P</div>
+      <div class="brand-name">ProxGlobal</div>
+    </a>
+    <div class="topbar-tag"><span>tech for life</span></div>
   </div>
+  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+
+<div class="hero" id="top">
+  <canvas class="hero-canvas" id="netCanvas"></canvas>
+  <div class="hero-grid">
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> Privacy Policy</span>
+      <h1>What we collect — and what<br>we deliberately don't.</h1>
+      <p>This policy explains how ProxGlobal's apps handle information on your device, in plain terms. No hidden clauses, no jargon you have to decode.</p>
+
+      <div class="hero-visual" id="heroVisual">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="orbit o1"><span class="node"></span></div>
+        <div class="orbit o2 rev"><span class="node"></span></div>
+        <div class="orbit o3"><span class="node"></span></div>
+        <svg class="shield-svg" viewBox="0 0 100 100" fill="none">
+          <path class="shield-fill" d="M50 6 L88 20 V48 C88 72 72 88 50 96 C28 88 12 72 12 48 V20 Z"
+            fill="rgba(255,255,255,.06)" stroke="none"/>
+          <path class="shield-path" d="M50 6 L88 20 V48 C88 72 72 88 50 96 C28 88 12 72 12 48 V20 Z"
+            stroke="#5CDBFF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          <path class="lock-path" d="M39 46 V38 a11 11 0 0 1 22 0 V46" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+          <rect class="lock-path" x="34" y="46" width="32" height="24" rx="5" fill="#fff"/>
+          <circle class="lock-path" cx="50" cy="58" r="3.6" fill="#0A5CE0"/>
+        </svg>
+      </div>
+
+      <div class="hero-meta">
+        <div class="meta-chip">Last updated <b>&nbsp;July 1, 2026</b></div>
+        <div class="meta-chip">Applies to <b>&nbsp;all ProxGlobal apps</b></div>
+        <a class="meta-chip meta-chip-link" href="mailto:support@proxglobal.com">Contact <b>&nbsp;support@proxglobal.com</b></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="glance">
+  <div class="glance-card">
+    <div class="glance-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A5CE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></div>
+    <h3>No personal data</h3>
+    <p>We don't collect your name, email, contacts, or photos.</p>
+  </div>
+  <div class="glance-card">
+    <div class="glance-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A5CE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></div>
+    <h3>No facial data</h3>
+    <p>Nothing about your face is ever collected or stored.</p>
+  </div>
+  <div class="glance-card">
+    <div class="glance-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A5CE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/></svg></div>
+    <h3>Never sold</h3>
+    <p>Whatever we do process is never sold to third parties.</p>
+  </div>
+  <div class="glance-card">
+    <div class="glance-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0A5CE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4M12 16h.01M4 12a8 8 0 1116 0 8 8 0 01-16 0z"/></svg></div>
+    <h3>You're in control</h3>
+    <p>Manage tracking permissions anytime in-app or in device settings.</p>
+  </div>
+</div>
+
+<div class="layout">
+
+  <nav class="toc" id="toc">
+    <div class="toc-label">On this page</div>
+    <div class="toc-track" id="tocTrack">
+      <div class="toc-indicator" id="tocIndicator"></div>
+      <a href="#personal-information"><span class="n">1</span> Personal Information</a>
+      <a href="#facial-data"><span class="n">2</span> Facial Data</a>
+      <a href="#security"><span class="n">3</span> Security</a>
+      <a href="#your-privacy"><span class="n">4</span> Your Privacy</a>
+      <a href="#crashlytics"><span class="n">5</span> Crashlytics</a>
+      <a href="#tracking"><span class="n">6</span> Data &amp; Tracking</a>
+      <a href="#contact"><span class="n">7</span> Contact</a>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <section class="card" id="personal-information">
+      <div class="kicker"><span class="num">1</span><h2>Personal Information</h2></div>
+      <p>We do not collect any personal information from you — no name, email address, physical address, contacts, or photos. Our apps are built to function fully without asking for who you are.</p>
+    </section>
+
+    <section class="card" id="facial-data">
+      <div class="kicker"><span class="num">2</span><h2>Facial Data</h2></div>
+      <p>We do not collect or store facial data in any of our apps. If a feature involves the camera, that data is never retained or transmitted for identification purposes.</p>
+    </section>
+
+    <section class="card" id="security">
+      <div class="kicker"><span class="num">3</span><h2>Security</h2></div>
+      <p>We're committed to protecting your privacy. Although we don't collect personal information, we still apply administrative, physical, and electronic safeguards to protect non-personal information from unauthorized access and use.</p>
+    </section>
+
+    <section class="card" id="your-privacy">
+      <div class="kicker"><span class="num">4</span><h2>Your Privacy</h2></div>
+      <p>We do not retain or store any information that could be used to identify you. Any data associated with your usage is never shared or sold to third parties.</p>
+    </section>
+
+    <section class="card" id="crashlytics">
+      <div class="kicker"><span class="num">5</span><h2>Crashlytics</h2></div>
+      <p>We use Crashlytics to collect crash reports and anonymous statistical data to improve app stability. If the app crashes, diagnostic data may be uploaded solely to help us identify and fix the problem.</p>
+    </section>
+
+    <section class="card" id="tracking">
+      <div class="kicker"><span class="num">6</span><h2>Data Used to Track You</h2></div>
+      <p>Some limited data may be used to track activity across apps and websites owned by other companies, strictly for the purposes described below.</p>
+
+      <div class="subblock">
+        <h4>Identifiers &amp; usage data used for tracking</h4>
+        <div class="tag-row">
+          <span class="tag">Device ID (IDFA)</span>
+          <span class="tag">Feature interactions</span>
+          <span class="tag">Content viewed</span>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <tr><th>Category</th><th>Data collected</th><th>Purpose</th></tr>
+        <tr>
+          <td class="dcat"><span class="dot linked"></span>Linked to you</td>
+          <td>Approximate location</td>
+          <td>App functionality, personalized content</td>
+        </tr>
+        <tr>
+          <td class="dcat"><span class="dot linked"></span>Linked to you</td>
+          <td>App interaction data</td>
+          <td>Analytics, performance, personalized ads</td>
+        </tr>
+        <tr>
+          <td class="dcat"><span class="dot notlinked"></span>Not linked to you</td>
+          <td>Crash logs, performance diagnostics</td>
+          <td>Improving app stability and performance</td>
+        </tr>
+      </table>
+
+      <div class="subblock">
+        <h4>Tracking permission</h4>
+        <p style="margin:0;">Our apps request permission to track you for personalized advertising or analytics across apps and websites owned by other companies. You're free to manage this anytime in the app, or through your device's privacy settings.</p>
+      </div>
+    </section>
+
+    <section class="contact-box" id="contact">
+      <div>
+        <h2>Questions about this policy?</h2>
+        <p>Reach out and we'll get back to you directly — no ticket queue, no runaround.</p>
+      </div>
+      <a class="contact-btn" href="mailto:support@proxglobal.com">
+        support@proxglobal.com
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+
+  </div>
+</div>
+
+<a class="fab-top" href="#top" id="fabTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
+<footer>
+  <div class="footer-inner">
+    <p>© 2026 ProxGlobal Investment and Technology Development JSC. All rights reserved.</p>
+    <a class="back-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Scroll spy: highlight active TOC link + slide indicator ---- */
+  const sections = document.querySelectorAll('section.card, section.contact-box');
+  const links = document.querySelectorAll('.toc a');
+  const track = document.getElementById('tocTrack');
+  const indicator = document.getElementById('tocIndicator');
+  const map = {
+    'personal-information':0,'facial-data':1,'security':2,'your-privacy':3,
+    'crashlytics':4,'tracking':5,'contact':6
+  };
+
+  function moveIndicator(link){
+    if(!link || window.innerWidth <= 900) return;
+    const trackRect = track.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    indicator.style.height = linkRect.height + 'px';
+    indicator.style.transform = `translateY(${linkRect.top - trackRect.top}px)`;
+    indicator.classList.add('ready');
+  }
+
+  const spyObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const idx = map[entry.target.id];
+        links.forEach(l=>l.classList.remove('active'));
+        if(idx!==undefined && links[idx]){
+          links[idx].classList.add('active');
+          moveIndicator(links[idx]);
+        }
+      }
+    });
+  },{ rootMargin: '-20% 0px -65% 0px', threshold: 0 });
+  sections.forEach(s=>spyObserver.observe(s));
+
+  window.addEventListener('resize', ()=>{
+    const active = document.querySelector('.toc a.active');
+    if(active) moveIndicator(active);
+  });
+
+  /* ---- Scroll reveal for cards ---- */
+  const revealTargets = document.querySelectorAll('section.card, .glance-card');
+  if(prefersReduced){
+    revealTargets.forEach(el=>{ el.classList.add('visible'); });
+  } else {
+    const revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },{ threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealTargets.forEach(el=>revealObserver.observe(el));
+  }
+
+  /* ---- Scroll progress bar + topbar shadow + FAB ---- */
+  const progressBar = document.getElementById('progressBar');
+  const topbar = document.getElementById('topbar');
+  const fab = document.getElementById('fabTop');
+
+  function onScroll(){
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = (doc.scrollHeight - doc.clientHeight) || 1;
+    const pct = Math.min(100, (scrollTop / scrollHeight) * 100);
+    progressBar.style.width = pct + '%';
+
+    topbar.classList.toggle('scrolled', scrollTop > 8);
+    fab.classList.toggle('show', scrollTop > 500);
+  }
+  /* ---- Animated particle network in hero (tech motif) ---- */
+  (function initNetwork(){
+    const canvas = document.getElementById('netCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const hero = document.getElementById('top');
+    let w, h, dots = [];
+    const DOT_COUNT = 46;
+    const LINK_DIST = 130;
+
+    function resize(){
+      w = canvas.width = hero.offsetWidth;
+      h = canvas.height = hero.offsetHeight;
+    }
+    function makeDots(){
+      dots = Array.from({length: DOT_COUNT}, () => ({
+        x: Math.random()*w, y: Math.random()*h,
+        vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
+        r: Math.random()*1.6+1
+      }));
+    }
+    function frame(){
+      ctx.clearRect(0,0,w,h);
+      for(const d of dots){
+        d.x += d.vx; d.y += d.vy;
+        if(d.x < 0 || d.x > w) d.vx *= -1;
+        if(d.y < 0 || d.y > h) d.vy *= -1;
+      }
+      for(let i=0;i<dots.length;i++){
+        for(let j=i+1;j<dots.length;j++){
+          const a = dots[i], b = dots[j];
+          const dx = a.x-b.x, dy = a.y-b.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist < LINK_DIST){
+            ctx.strokeStyle = `rgba(150,210,255,${(1-dist/LINK_DIST)*.35})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      for(const d of dots){
+        ctx.beginPath();
+        ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(200,230,255,.7)';
+        ctx.fill();
+      }
+      if(!prefersReduced) requestAnimationFrame(frame);
+    }
+
+    resize(); makeDots();
+    window.addEventListener('resize', ()=>{ resize(); makeDots(); });
+
+    if(prefersReduced){
+      frame(); // draw one static frame only
+    } else {
+      requestAnimationFrame(frame);
+    }
+  })();
+
+  /* ---- Mouse parallax tilt on the shield illustration ---- */
+  if(!prefersReduced){
+    const hero = document.getElementById('top');
+    const visual = document.getElementById('heroVisual');
+    if(hero && visual){
+      hero.addEventListener('mousemove', (e)=>{
+        const rect = hero.getBoundingClientRect();
+        const px = (e.clientX - rect.left)/rect.width - .5;
+        const py = (e.clientY - rect.top)/rect.height - .5;
+        visual.style.transform = `rotateY(${px*14}deg) rotateX(${-py*14}deg)`;
+      });
+      hero.addEventListener('mouseleave', ()=>{
+        visual.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+  }
+</script>
+
 </body>
 </html>
